@@ -133,7 +133,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   {slide.content.chartType === "bar" && (
-                    <BarChart data={slide.content.data}>
+                    <BarChart data={slide.content?.data || []}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -144,7 +144,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                   {slide.content.chartType === "pie" && (
                     <PieChart>
                       <Pie
-                        data={slide.content.data}
+                        data={slide.content?.data || []}
                         cx="50%"
                         cy="50%"
                         outerRadius={100}
@@ -152,7 +152,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                         dataKey="value"
                         label
                       >
-                        {slide.content.data.map((entry: any, index: number) => (
+                        {(slide.content?.data || []).map((entry: any, index: number) => (
                           <Cell key={`cell-${index}`} fill={`var(--color-chart-${(index % 5) + 1})`} />
                         ))}
                       </Pie>
@@ -160,7 +160,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                     </PieChart>
                   )}
                   {slide.content.chartType === "line" && (
-                    <LineChart data={slide.content.data}>
+                    <LineChart data={slide.content?.data || []}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -290,7 +290,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                 <h2 className="text-4xl font-bold text-primary text-balance">{slide.content.leftTitle}</h2>
                 <p className="text-xl text-muted-foreground text-balance">{slide.content.leftSubtitle}</p>
                 {slide.content.leftPoints && (
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {slide.content.leftPoints.map((point: string, index: number) => (
                       <li key={index} className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-accent mt-1 flex-shrink-0" />

@@ -405,7 +405,7 @@ export const slides = [
       cards: [
         {
           icon: <Users className="h-6 w-6 text-primary-foreground" />,
-          title: "Daily Wisdom Sessions",
+          title: "Wisdom Sessions",
           description:
             "Morning circles where seniors share life experiences, stories, and practical wisdom with children and families",
         },

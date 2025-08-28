@@ -84,7 +84,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
               {slide.content.image && (
-                <div className="space-y-4">
+                <div className="space-y-4 h-auto">
                   <img
                     src={slide.content.image || "/placeholder.svg"}
                     alt={slide.content.title}

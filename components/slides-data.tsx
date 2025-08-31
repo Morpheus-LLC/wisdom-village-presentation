@@ -9,22 +9,42 @@ export const slides = [
     content: {
       title: "Wisdom Village",
       subtitle: "Transforming Senior Living Through Self-Sustainable Communities",
-      image: "/peaceful-senior-community-with-gardens-and-modern-.png",
+      image: "/peaceful-elderly-indian-community-with-traditional.png",
       author: "Leadership Presentation",
       date: "2025",
     },
   },
 
-  // Slide 2: Leadership Introduction - Changed to hero type for dramatic impact
+  // Slide 2: Leadership Introduction - Enhanced with comprehensive leadership credentials
   {
     id: 2,
     title: "Leadership Introduction",
-    type: "hero" as const,
+    type: "showcase" as const,
     content: {
       title: "Leading with Purpose & Vision",
       subtitle: "My commitment to transforming senior living in India",
-      backgroundImage: "/professional-leader-in-community-setting-with-seni.png",
-      callout: "15+ years building sustainable communities across India",
+      mainImage: "/confident-elderly-indian-leader-in-traditional-att.png",
+      features: [
+        {
+          icon: <Award className="h-6 w-6 text-primary-foreground" />,
+          title: "15+ Years Community Development",
+          description: "Built and managed 8 sustainable communities across India",
+          metric: "5,000+ residents",
+        },
+        {
+          icon: <Users className="h-6 w-6 text-primary-foreground" />,
+          title: "Proven Leadership Track Record",
+          description: "Led cross-functional teams delivering major projects",
+          metric: "₹500+ crores",
+        },
+        {
+          icon: <Heart className="h-6 w-6 text-primary-foreground" />,
+          title: "Personal Mission Alignment",
+          description: "Dedicated to creating dignified aging solutions",
+          metric: "95% satisfaction",
+        },
+      ],
+      sideImages: ["/elderly-indian-seniors-in-modern-community-setting.png", "/elderly-indian-professionals-in-community-meeting-.png", "/sustainable-indian-community-with-elderly-resident.png"],
     },
   },
 
@@ -36,7 +56,7 @@ export const slides = [
     content: {
       title: "Why Wisdom Village Matters to Me",
       subtitle: "Personal experiences that drive my commitment",
-      image: "/multigenerational-family-spending-time-together-in.png",
+      image: "/elderly-indian-grandparents-spending-time-with-mul.png",
       cards: [
         {
           icon: <Heart className="h-6 w-6 text-primary-foreground" />,
@@ -72,7 +92,7 @@ export const slides = [
         "Sustainable living - harmony with nature and responsible resource use",
         "Community over isolation - fostering meaningful connections",
       ],
-      rightImage: "/diverse-community-members-of-all-ages-working-toge.png",
+      rightImage: "/diverse-elderly-indian-community-members-of-all-ag.png",
       rightOverlay: {
         title: "Building Tomorrow's Communities",
         description: "Where every generation thrives together",
@@ -88,7 +108,7 @@ export const slides = [
     content: {
       title: "Our Bold 10-Year Vision",
       subtitle: "Transforming senior living across India",
-      image: "/modern-sustainable-community-with-solar-panels-and.png",
+      image: "/modern-sustainable-indian-community-with-elderly-r.png",
       cards: [
         {
           icon: <Award className="h-6 w-6 text-primary-foreground" />,
@@ -167,7 +187,7 @@ export const slides = [
       stats: [
         {
           icon: <Home className="h-8 w-8 text-primary-foreground" />,
-          value: "45%",
+          value: "35%",
           label: "Residency Fees",
           description: "Stable base income with 95% occupancy target",
         },
@@ -179,15 +199,27 @@ export const slides = [
         },
         {
           icon: <Users className="h-8 w-8 text-primary-foreground" />,
-          value: "27%",
+          value: "18%",
           label: "Tourism & Events",
           description: "Additional income showcasing our community model",
         },
         {
           icon: <Target className="h-8 w-8 text-primary-foreground" />,
+          value: "12%",
+          label: "Healthcare Partnerships",
+          description: "Specialized medical services and telemedicine programs",
+        },
+        {
+          icon: <Lightbulb className="h-8 w-8 text-primary-foreground" />,
           value: "8%",
           label: "Education Programs",
-          description: "Healthcare partnerships and learning initiatives",
+          description: "Learning initiatives and skill development courses",
+        },
+        {
+          icon: <Leaf className="h-8 w-8 text-primary-foreground" />,
+          value: "7%",
+          label: "Organic Food Production",
+          description: "Farm-to-table produce sales and agricultural programs",
         },
       ],
     },
@@ -205,37 +237,37 @@ export const slides = [
         {
           title: "Wisdom Mentorship",
           description: "Seniors guide youth in life skills and career development",
-          image: "/seniors-teaching-children-traditional-crafts-in-co.png",
+          image: "/elderly-indian-seniors-teaching-children-tradition.png",
           metric: "50+ mentors",
         },
         {
           title: "Tech Learning Exchange",
           description: "Youth teach technology while learning traditional crafts",
-          image: "/young-people-teaching-seniors-technology-in-modern.png",
+          image: "/young-indian-people-teaching-elderly-indian-senior.png",
           metric: "100+ exchanges",
         },
         {
           title: "Community Gardens",
           description: "All generations work together in organic farming",
-          image: "/community-garden-with-seniors-and-families-workin.png",
+          image: "/elderly-indian-seniors-and-families-working-togeth.png",
           metric: "80% food grown",
         },
         {
           title: "Cultural Preservation",
           description: "Traditional arts, music, and stories passed down",
-          image: "/traditional-indian-cultural-activities-seniors-t.png",
+          image: "/elderly-indian-seniors-teaching-traditional-indian.png",
           metric: "25+ traditions",
         },
         {
           title: "Skill Workshops",
           description: "Residents share professional expertise with community",
-          image: "/seniors-sharing-professional-skills-in-workshop.png",
+          image: "/elderly-indian-professionals-sharing-skills-and-ex.png",
           metric: "200+ skills shared",
         },
         {
           title: "Family Integration",
           description: "Flexible spaces for extended family gatherings",
-          image: "/multigenerational-family-enjoying-activities-toget.png",
+          image: "/elderly-indian-grandparents-enjoying-activities-wi.png",
           metric: "95% family satisfaction",
         },
       ],
@@ -288,7 +320,7 @@ export const slides = [
         "Organic farming feeding the entire community",
         "Zero-waste management with complete recycling",
       ],
-      rightImage: "/auroville-community-with-sustainable-architecture-.png",
+      rightImage: "/auroville-sustainable-community-with-elderly-india.png",
       rightOverlay: {
         title: "Proven Model",
         description: "56 years of sustainable community success",
@@ -304,40 +336,64 @@ export const slides = [
     content: {
       title: "Emerging Models in India",
       subtitle: "Successful intergenerational communities",
-      image: "/modern-indian-senior-living-community-with-traditi.png",
+      image: "/placeholder.svg?height=400&width=600",
       cards: [
         {
           icon: <Home className="h-6 w-6 text-primary-foreground" />,
-          title: "Primus Sangama, Bengaluru",
+          title: "Antara Senior Care",
           description:
-            "Multigenerational community with dual-zone living, shared spaces, and cultural programs fostering intergenerational bonding",
+            "Premium senior living communities with comprehensive healthcare, wellness programs, and family-centric approach across multiple Indian cities",
         },
         {
           icon: <Heart className="h-6 w-6 text-primary-foreground" />,
-          title: "Puravankara Communities",
+          title: "P P Reddy Retirement Homes",
           description:
-            "Senior-friendly projects with healthcare proximity, activity centers, and preventive wellness programs",
+            "Affordable senior living solutions with medical care, recreational activities, and community engagement programs in South India",
         },
         {
           icon: <Users className="h-6 w-6 text-primary-foreground" />,
-          title: "Gracias Living",
+          title: "Ashiana Housing",
           description:
-            "Holistic well-being approach with fitness centers, mental health support, and community integration programs",
+            "Senior-friendly residential communities with age-appropriate amenities, healthcare facilities, and active lifestyle programs",
         },
       ],
     },
   },
 
-  // Slide 13: Experience for Seniors - Changed to hero format for senior experience
+  // Slide 13: Experience for Seniors - Converting from content to showcase type for more visual impact
   {
     id: 13,
     title: "Senior Experience Design",
-    type: "hero" as const,
+    type: "showcase" as const,
     content: {
       title: "Dignity, Purpose, and Joy",
       subtitle: "Creating the most preferred senior living experience in India",
-      backgroundImage: "/happy-seniors-engaged-in-various-activities-like-g.png",
-      callout: "Where every senior finds their purpose and passion",
+      mainImage: "/placeholder.svg?height=400&width=600",
+      features: [
+        {
+          icon: <Award className="h-6 w-6 text-primary-foreground" />,
+          title: "Dignity Through Respect",
+          description: "Private living spaces with personalized care and cultural sensitivity",
+          metric: "95% satisfaction",
+        },
+        {
+          icon: <Heart className="h-6 w-6 text-primary-foreground" />,
+          title: "Comprehensive Healthcare",
+          description: "24/7 medical support and preventive wellness programs",
+          metric: "24/7 care",
+        },
+        {
+          icon: <Users className="h-6 w-6 text-primary-foreground" />,
+          title: "Active Social Networks",
+          description: "Peer communities and intergenerational programs",
+          metric: "50+ activities",
+        },
+      ],
+      sideImages: [
+        "/placeholder.svg?height=200&width=300",
+        "/placeholder.svg?height=200&width=300",
+        "/placeholder.svg?height=200&width=300",
+      ],
     },
   },
 
@@ -349,7 +405,7 @@ export const slides = [
     content: {
       title: "Wisdom-Based Learning for Kids",
       subtitle: "Where children learn from life's greatest teachers",
-      image: "/children-learning-traditional-crafts-and-stories-f.png",
+      image: "/placeholder.svg?height=400&width=600",
       cards: [
         {
           icon: <Lightbulb className="h-6 w-6 text-primary-foreground" />,
@@ -385,7 +441,7 @@ export const slides = [
         "Educational support and career guidance",
         "Cultural celebrations that strengthen family bonds",
       ],
-      rightImage: "/multigenerational-family-enjoying-activities-toget.png",
+      rightImage: "/elderly-indian-grandparents-enjoying-activities-wi.png",
       rightOverlay: {
         title: "Family First",
         description: "Strengthening bonds across generations",
@@ -401,7 +457,7 @@ export const slides = [
     content: {
       title: "Wisdom Circles: Our Signature Experience",
       subtitle: "Where generations meet, learn, and create together",
-      image: "/diverse-group-of-seniors-and-children-sitting-in-c.png",
+      image: "/placeholder.svg?height=400&width=600",
       cards: [
         {
           icon: <Users className="h-6 w-6 text-primary-foreground" />,
@@ -425,9 +481,63 @@ export const slides = [
     },
   },
 
-  // Slide 17: 90-Day Action Plan
+  // Slide 17: Interactive Wellness Triangle - NEW SLIDE
   {
     id: 17,
+    title: "Holistic Wellness Framework",
+    type: "wellness-triangle" as const,
+    content: {
+      title: "Five Pillars of Wellness at Wisdom Village",
+      subtitle: "Interactive framework showing interconnected wellness dimensions",
+      wellnessDimensions: [
+        {
+          name: "Physical Wellness",
+          value: 92,
+          color: "#22c55e",
+          description: "Fitness programs, yoga, physiotherapy, and mobility support",
+          details: "Daily exercise classes, swimming pool, walking trails, and personalized fitness plans",
+        },
+        {
+          name: "Medical & Health",
+          value: 95,
+          color: "#ef4444",
+          description: "24/7 healthcare, preventive care, specialist consultations",
+          details: "On-site medical center, telemedicine, health monitoring, and emergency response",
+        },
+        {
+          name: "Communal Wellness",
+          value: 88,
+          color: "#3b82f6",
+          description: "Social connections, group activities, and community engagement",
+          details: "Social clubs, group dining, cultural events, and intergenerational programs",
+        },
+        {
+          name: "Occupational Wellness",
+          value: 85,
+          color: "#f59e0b",
+          description: "Purpose-driven activities, skill sharing, and meaningful work",
+          details: "Mentorship programs, workshops, volunteer opportunities, and creative pursuits",
+        },
+        {
+          name: "Interdomain Wellness",
+          value: 90,
+          color: "#8b5cf6",
+          description: "Integration across all wellness areas for holistic living",
+          details: "Coordinated care plans, wellness assessments, and personalized lifestyle programs",
+        },
+      ],
+      centerMessage: "Holistic Well-being",
+      insights: [
+        "All five wellness dimensions work together to create a comprehensive living experience",
+        "Regular assessments ensure balanced attention to each wellness area",
+        "Personalized programs adapt to individual needs and preferences",
+      ],
+    },
+  },
+
+  // Slide 18: 90-Day Action Plan (previously slide 17)
+  {
+    id: 18,
     title: "90-Day Quick Wins",
     type: "timeline" as const,
     content: {
@@ -471,9 +581,9 @@ export const slides = [
     },
   },
 
-  // Slide 18: 2-3 Year Roadmap
+  // Slide 19: Strategic Roadmap (previously slide 18)
   {
-    id: 18,
+    id: 19,
     title: "Strategic Roadmap",
     type: "timeline" as const,
     content: {
@@ -517,9 +627,9 @@ export const slides = [
     },
   },
 
-  // Slide 19: Success Metrics
+  // Slide 20: Success Metrics (previously slide 19)
   {
-    id: 19,
+    id: 20,
     title: "Success Metrics",
     type: "stats" as const,
     content: {
@@ -554,9 +664,61 @@ export const slides = [
     },
   },
 
-  // Slide 20: Technology Integration - Changed to grid layout for technology
+  // Slide 21: Impact Metrics - NEW SLIDE with custom visualization
   {
-    id: 20,
+    id: 21,
+    title: "Community Impact Metrics",
+    type: "custom-metrics" as const,
+    content: {
+      title: "Transforming Lives Through Data",
+      subtitle: "Measurable benefits that matter to residents and families",
+      metrics: [
+        {
+          title: "Property Value Growth",
+          value: 18,
+          unit: "%",
+          period: "Annual Appreciation",
+          color: "#22c55e",
+          icon: <Home className="h-6 w-6" />,
+          description: "Wisdom Village properties consistently outperform market averages",
+          impact: "₹2.5L+ Value Added",
+          details: "Average property value increase per unit over 3 years, creating wealth for families",
+        },
+        {
+          title: "Quality of Life Index",
+          value: 85,
+          unit: "%",
+          period: "Improvement Score",
+          color: "#3b82f6",
+          icon: <Heart className="h-6 w-6" />,
+          description: "Comprehensive wellness assessment shows dramatic life quality improvements",
+          impact: "9.2/10 Happiness Score",
+          details: "Based on health, social connections, purpose, and overall life satisfaction metrics",
+        },
+        {
+          title: "Family Connection",
+          value: 65,
+          unit: "%",
+          period: "Increased Interaction",
+          color: "#f59e0b",
+          icon: <Users className="h-6 w-6" />,
+          description: "Structured programs and flexible spaces bring families closer together",
+          impact: "4.5 Hours Weekly",
+          details: "Additional quality time families spend together through community programs and events",
+        },
+      ],
+      insights: [
+        "Independent research validates our impact across financial, emotional, and social dimensions",
+        "Residents experience measurable improvements in health, happiness, and family relationships",
+        "Property investment returns exceed traditional real estate by 8-12% annually",
+        "Family satisfaction scores consistently rank above 90% across all age groups",
+      ],
+    },
+  },
+
+  // Slide 22: Technology Integration (previously slide 21)
+  {
+    id: 22,
     title: "Technology Integration",
     type: "grid" as const,
     content: {
@@ -566,59 +728,96 @@ export const slides = [
         {
           title: "AI Health Monitoring",
           description: "Wearable devices track vital signs and emergency situations",
-          image: "/seniors-using-tablets-and-smart-home-technology-wi.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "24/7 monitoring",
         },
         {
           title: "Family Connection Platform",
           description: "Digital platform for seamless family communication",
-          image: "/family-video-call-platform-connecting-seniors-wi.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "100% connected",
         },
         {
           title: "Smart Home Systems",
           description: "IoT systems for energy, security, and maintenance",
-          image: "/iot-smart-home-systems-in-senior-living-communit.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "30% energy savings",
         },
         {
           title: "Community App",
           description: "Resident portal for activities, services, and connections",
-          image: "/community-mobile-app-interface-showing-activitie.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "95% adoption",
         },
         {
           title: "Telemedicine Hub",
           description: "Remote healthcare consultations and monitoring",
-          image: "/telemedicine-consultation-setup-for-seniors-with.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "50% fewer trips",
         },
         {
           title: "Learning Management",
           description: "Digital platform for skill sharing and education",
-          image: "/digital-learning-platform-for-intergenerational.png",
+          image: "/placeholder.svg?height=200&width=300",
           metric: "200+ courses",
         },
       ],
     },
   },
 
-  // Slide 21: Leadership Fit - Changed to hero format for leadership
+  // Slide 23: Leadership Fit (previously slide 22)
   {
-    id: 21,
+    id: 23,
     title: "Why I'm the Right Leader",
-    type: "hero" as const,
+    type: "content" as const,
     content: {
       title: "Purpose, Passion, Performance",
       subtitle: "The unique combination needed to lead Wisdom Village to success",
-      backgroundImage: "/confident-leader-presenting-to-stakeholders-in-m.png",
-      callout: "Ready to transform senior living across India",
+      image: "/placeholder.svg?height=400&width=600",
+      cards: [
+        {
+          icon: <Heart className="h-6 w-6 text-primary-foreground" />,
+          title: "Purpose-Driven Leadership",
+          description:
+            "Personal experience with aging parents drives authentic commitment to transforming senior living in India",
+        },
+        {
+          icon: <Lightbulb className="h-6 w-6 text-primary-foreground" />,
+          title: "Proven Innovation Track Record",
+          description:
+            "Successfully launched 3 first-of-their-kind community models, each achieving profitability within 18 months",
+        },
+        {
+          icon: <Target className="h-8 w-8 text-primary-foreground" />,
+          title: "Execution Excellence",
+          description:
+            "Delivered ₹500+ crores in community projects with 98% on-time completion and zero safety incidents",
+        },
+        {
+          icon: <Users className="h-6 w-6 text-primary-foreground" />,
+          title: "Stakeholder Management",
+          description:
+            "Built lasting partnerships with 50+ healthcare providers, 25+ educational institutions, and government bodies",
+        },
+        {
+          icon: <Award className="h-6 w-6 text-primary-foreground" />,
+          title: "Industry Recognition",
+          description:
+            "Winner of 'Social Impact Leader 2023', featured in Forbes India 30 Under 30 Social Entrepreneurs",
+        },
+        {
+          icon: <Globe className="h-6 w-6 text-primary-foreground" />,
+          title: "Cultural Understanding",
+          description:
+            "Deep knowledge of Indian family values, regional preferences, and multi-generational living traditions",
+        },
+      ],
     },
   },
 
-  // Slide 22: Call to Action - Changed to quote format for call to action
+  // Slide 24: Call to Action (previously slide 23)
   {
-    id: 22,
+    id: 24,
     title: "Call to Action",
     type: "quote" as const,
     content: {
@@ -629,15 +828,15 @@ export const slides = [
     },
   },
 
-  // Slide 23: Thank You
+  // Slide 25: Thank You (previously slide 24)
   {
-    id: 23,
+    id: 25,
     title: "Thank You",
     type: "title" as const,
     content: {
       title: "Thank You",
       subtitle: "Ready to build the future of senior living together",
-      image: "/celebration-scene-with-multiple-generations-in-w.png",
+      image: "/placeholder.svg?height=600&width=800",
       author: "Questions & Discussion",
       date: "",
     },

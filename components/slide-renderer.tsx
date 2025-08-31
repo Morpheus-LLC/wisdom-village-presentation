@@ -1,3 +1,5 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -15,6 +17,7 @@ import {
   Line,
 } from "recharts"
 import { TrendingUp, CheckCircle } from "lucide-react"
+import { useState } from "react"
 
 interface SlideData {
   id: number
@@ -31,6 +34,9 @@ interface SlideData {
     | "grid"
     | "quote"
     | "comparison"
+    | "showcase"
+    | "wellness-triangle"
+    | "custom-metrics" // Added new custom-metrics slide type
   content?: any
 }
 
@@ -39,8 +45,109 @@ interface SlideRendererProps {
 }
 
 export default function SlideRenderer({ slide }: SlideRendererProps) {
+  const [hoveredDimension, setHoveredDimension] = useState<string | null>(null)
+  const [hoveredMetric, setHoveredMetric] = useState<string | null>(null) // Added state for custom metrics hover
+
   const renderContent = () => {
     switch (slide.type) {
+      case "custom-metrics":
+        return (
+          <div className="min-h-full space-y-6 md:space-y-8 p-4 md:p-8 overflow-y-auto bg-gradient-to-br from-slate-50 to-white">
+            <div className="text-center space-y-2 md:space-y-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary text-balance">
+                {slide.content.title}
+              </h2>
+              {slide.content.subtitle && (
+                <p className="text-lg md:text-xl text-muted-foreground text-balance">{slide.content.subtitle}</p>
+              )}
+            </div>
+
+            {/* Custom animated metrics visualization */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+              {slide.content.metrics?.map((metric: any, index: number) => (
+                <div
+                  key={index}
+                  className="relative group cursor-pointer"
+                  onMouseEnter={() => setHoveredMetric(metric.title)}
+                  onMouseLeave={() => setHoveredMetric(null)}
+                >
+                  <Card className="p-6 md:p-8 bg-white border-2 border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-xl">
+                    {/* Animated circular progress */}
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
+                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        {/* Background circle */}
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" strokeWidth="8" />
+                        {/* Progress circle */}
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          fill="none"
+                          stroke={metric.color}
+                          strokeWidth="8"
+                          strokeLinecap="round"
+                          strokeDasharray={`${metric.value * 2.83} 283`}
+                          className="transition-all duration-1000 ease-out"
+                          style={{
+                            filter:
+                              hoveredMetric === metric.title ? "drop-shadow(0 0 8px rgba(34, 197, 94, 0.4))" : "none",
+                          }}
+                        />
+                      </svg>
+
+                      {/* Center content */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <div className="p-3 rounded-full mb-2" style={{ backgroundColor: `${metric.color}20` }}>
+                          <div style={{ color: metric.color }}>{metric.icon}</div>
+                        </div>
+                        <div className="text-2xl md:text-3xl font-bold text-foreground">
+                          {metric.value}
+                          {metric.unit}
+                        </div>
+                        <div className="text-xs md:text-sm text-muted-foreground text-center">{metric.period}</div>
+                      </div>
+                    </div>
+
+                    {/* Metric details */}
+                    <div className="text-center space-y-3">
+                      <h3 className="text-lg md:text-xl font-semibold text-foreground">{metric.title}</h3>
+                      <p className="text-sm md:text-base text-muted-foreground">{metric.description}</p>
+                      <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-3">
+                        <div className="text-lg font-bold text-primary mb-1">{metric.impact}</div>
+                        <div className="text-xs text-muted-foreground">{metric.details}</div>
+                      </div>
+                    </div>
+
+                    {/* Hover effect overlay */}
+                    {hoveredMetric === metric.title && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-lg pointer-events-none" />
+                    )}
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            {/* Insights section */}
+            {slide.content.insights && (
+              <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4 md:mb-6">
+                  Research-Backed Impact
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  {slide.content.insights.map((insight: string, index: number) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="p-1 bg-primary/10 rounded-full mt-1">
+                        <TrendingUp className="h-4 w-4 text-primary" />
+                      </div>
+                      <span className="text-sm md:text-base text-foreground leading-relaxed">{insight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )
+
       case "title":
         return (
           <div className="min-h-full flex flex-col items-center justify-center text-center space-y-4 md:space-y-8 p-4 md:p-8">
@@ -70,6 +177,188 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
           </div>
         )
 
+      case "wellness-triangle":
+        return (
+          <div className="min-h-full space-y-4 md:space-y-8 p-4 md:p-8 overflow-y-auto">
+            <div className="text-center space-y-2 md:space-y-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary text-balance">
+                {slide.content.title}
+              </h2>
+              {slide.content.subtitle && (
+                <p className="text-lg md:text-xl text-muted-foreground text-balance">{slide.content.subtitle}</p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+              {/* Interactive Pentagon Visualization */}
+              <div className="xl:col-span-2 flex items-center justify-center">
+                <div className="relative w-full max-w-lg aspect-square">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    {/* Background pentagon */}
+                    <polygon
+                      points="200,50 350,150 300,300 100,300 50,150"
+                      fill="none"
+                      stroke="#e5e7eb"
+                      strokeWidth="2"
+                      className="opacity-30"
+                    />
+
+                    {/* Connecting lines to center */}
+                    {slide.content.wellnessDimensions?.map((dimension: any, index: number) => {
+                      const angle = (index * 72 - 90) * (Math.PI / 180)
+                      const x = 200 + 120 * Math.cos(angle)
+                      const y = 200 + 120 * Math.sin(angle)
+                      return (
+                        <line
+                          key={`line-${index}`}
+                          x1="200"
+                          y1="200"
+                          x2={x}
+                          y2={y}
+                          stroke="#d1d5db"
+                          strokeWidth="1"
+                          className="opacity-40"
+                        />
+                      )
+                    })}
+
+                    {/* Center hub */}
+                    <circle cx="200" cy="200" r="30" fill="var(--color-primary)" className="drop-shadow-lg" />
+                    <text
+                      x="200"
+                      y="195"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-white text-xs font-semibold"
+                    >
+                      Holistic
+                    </text>
+                    <text
+                      x="200"
+                      y="205"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-white text-xs font-semibold"
+                    >
+                      Well-being
+                    </text>
+
+                    {/* Wellness dimension nodes */}
+                    {slide.content.wellnessDimensions?.map((dimension: any, index: number) => {
+                      const angle = (index * 72 - 90) * (Math.PI / 180)
+                      const x = 200 + 120 * Math.cos(angle)
+                      const y = 200 + 120 * Math.sin(angle)
+                      const isHovered = hoveredDimension === dimension.name
+
+                      return (
+                        <g key={index}>
+                          <circle
+                            cx={x}
+                            cy={y}
+                            r={isHovered ? "25" : "20"}
+                            fill={dimension.color}
+                            className="cursor-pointer transition-all duration-200 drop-shadow-md"
+                            onMouseEnter={() => setHoveredDimension(dimension.name)}
+                            onMouseLeave={() => setHoveredDimension(null)}
+                          />
+                          <text
+                            x={x}
+                            y={y - 2}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            className="fill-white text-xs font-bold pointer-events-none"
+                          >
+                            {dimension.value}%
+                          </text>
+
+                          {/* Dimension label */}
+                          <text
+                            x={x}
+                            y={y + (y < 200 ? -35 : 45)}
+                            textAnchor="middle"
+                            className="fill-foreground text-sm font-medium pointer-events-none"
+                          >
+                            {dimension.name.split(" ")[0]}
+                          </text>
+                          <text
+                            x={x}
+                            y={y + (y < 200 ? -20 : 60)}
+                            textAnchor="middle"
+                            className="fill-foreground text-sm font-medium pointer-events-none"
+                          >
+                            {dimension.name.split(" ").slice(1).join(" ")}
+                          </text>
+                        </g>
+                      )
+                    })}
+                  </svg>
+
+                  {/* Hover tooltip */}
+                  {hoveredDimension && (
+                    <div className="absolute top-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg border">
+                      {slide.content.wellnessDimensions?.map((dimension: any) => {
+                        if (dimension.name === hoveredDimension) {
+                          return (
+                            <div key={dimension.name} className="space-y-2">
+                              <h4 className="font-semibold text-lg text-foreground">{dimension.name}</h4>
+                              <p className="text-sm text-muted-foreground">{dimension.description}</p>
+                              <p className="text-xs text-muted-foreground">{dimension.details}</p>
+                              <div className="text-2xl font-bold" style={{ color: dimension.color }}>
+                                {dimension.value}%
+                              </div>
+                            </div>
+                          )
+                        }
+                        return null
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Legend and insights */}
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-foreground">Wellness Dimensions</h3>
+                  <div className="space-y-3">
+                    {slide.content.wellnessDimensions?.map((dimension: any, index: number) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/50 cursor-pointer transition-colors"
+                        onMouseEnter={() => setHoveredDimension(dimension.name)}
+                        onMouseLeave={() => setHoveredDimension(null)}
+                      >
+                        <div
+                          className="w-4 h-4 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: dimension.color }}
+                        ></div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-sm text-foreground">{dimension.name}</div>
+                          <div className="text-xs text-muted-foreground">{dimension.value}%</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {slide.content.insights && (
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-foreground">Key Insights</h3>
+                    <ul className="space-y-3">
+                      {slide.content.insights.map((insight: string, index: number) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <TrendingUp className="h-4 w-4 md:h-5 md:w-5 text-accent mt-1 flex-shrink-0" />
+                          <span className="text-sm text-foreground">{insight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )
+
       case "content":
         return (
           <div className="min-h-full space-y-4 md:space-y-8 p-4 md:p-8 overflow-y-auto">
@@ -88,7 +377,7 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                   <img
                     src={slide.content.image || "/placeholder.svg"}
                     alt={slide.content.title}
-                    className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg"
+                    className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
                   />
                 </div>
               )}
@@ -141,7 +430,9 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
               <div className="h-64 md:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   {slide.content.chartType === "bar" && (
-                    <BarChart data={slide.content?.data || []}>
+                    <BarChart
+                      data={slide.content?.data?.filter((item) => item && item.name && item.value !== undefined) || []}
+                    >
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -152,7 +443,9 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                   {slide.content.chartType === "pie" && (
                     <PieChart>
                       <Pie
-                        data={slide.content?.data || []}
+                        data={
+                          slide.content?.data?.filter((item) => item && item.name && item.value !== undefined) || []
+                        }
                         cx="50%"
                         cy="50%"
                         outerRadius={100}
@@ -160,7 +453,9 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                         dataKey="value"
                         label
                       >
-                        {(slide.content?.data || []).map((entry: any, index: number) => (
+                        {(
+                          slide.content?.data?.filter((item) => item && item.name && item.value !== undefined) || []
+                        ).map((entry: any, index: number) => (
                           <Cell key={`cell-${index}`} fill={`var(--color-chart-${(index % 5) + 1})`} />
                         ))}
                       </Pie>
@@ -168,7 +463,9 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                     </PieChart>
                   )}
                   {slide.content.chartType === "line" && (
-                    <LineChart data={slide.content?.data || []}>
+                    <LineChart
+                      data={slide.content?.data?.filter((item) => item && item.name && item.value !== undefined) || []}
+                    >
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -343,8 +640,8 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
 
       case "grid":
         return (
-          <div className="min-h-full space-y-4 md:space-y-8 p-4 md:p-8 overflow-y-auto">
-            <div className="text-center space-y-2 md:space-y-4">
+          <div className="h-screen flex flex-col overflow-hidden">
+            <div className="flex-shrink-0 text-center space-y-2 md:space-y-4 p-4 md:p-6">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary text-balance">
                 {slide.content.title}
               </h2>
@@ -352,21 +649,25 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                 <p className="text-lg md:text-xl text-muted-foreground text-balance">{slide.content.subtitle}</p>
               )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {slide.content.items.map((item: any, index: number) => (
-                <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
-                  <img
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.title}
-                    className="w-full h-24 md:h-32 object-cover"
-                  />
-                  <div className="p-3 md:p-4 space-y-1 md:space-y-2">
-                    <h4 className="font-semibold text-sm md:text-lg text-foreground">{item.title}</h4>
-                    <p className="text-xs md:text-sm text-muted-foreground">{item.description}</p>
-                    {item.metric && <div className="text-lg md:text-2xl font-bold text-primary">{item.metric}</div>}
-                  </div>
-                </Card>
-              ))}
+            <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-24">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                {slide.content.items.map((item: any, index: number) => (
+                  <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow h-auto">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.title}
+                      className="w-full h-32 md:h-40 object-cover"
+                    />
+                    <div className="p-4 md:p-5 space-y-2 md:space-y-3">
+                      <h4 className="font-semibold text-base md:text-lg text-foreground leading-tight">{item.title}</h4>
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.description}</p>
+                      {item.metric && (
+                        <div className="text-xl md:text-2xl font-bold text-primary pt-1">{item.metric}</div>
+                      )}
+                    </div>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         )
@@ -439,6 +740,66 @@ export default function SlideRenderer({ slide }: SlideRendererProps) {
                 </div>
               </Card>
             </div>
+          </div>
+        )
+
+      case "showcase":
+        return (
+          <div className="h-screen overflow-hidden relative">
+            {/* Main hero image */}
+            <div className="absolute inset-0">
+              <img
+                src={slide.content.mainImage || "/placeholder.svg"}
+                alt={slide.content.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+            </div>
+
+            {/* Content overlay */}
+            <div className="relative h-full flex flex-col justify-between p-6 md:p-12">
+              {/* Header */}
+              <div className="space-y-2 md:space-y-4 max-w-2xl">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white text-balance leading-tight drop-shadow-lg">
+                  {slide.content.title}
+                </h1>
+                <p className="text-lg md:text-xl text-white/90 text-balance drop-shadow-md">{slide.content.subtitle}</p>
+              </div>
+
+              {/* Feature highlights */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl">
+                {slide.content.features?.map((feature: any, index: number) => (
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/20"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="p-2 bg-primary rounded-lg">{feature.icon}</div>
+                      <h3 className="text-lg md:text-xl font-semibold text-white">{feature.title}</h3>
+                    </div>
+                    <p className="text-sm md:text-base text-white/80">{feature.description}</p>
+                    {feature.metric && (
+                      <div className="text-2xl md:text-3xl font-bold text-primary mt-2">{feature.metric}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Side images */}
+            {slide.content.sideImages && (
+              <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 space-y-4 hidden lg:block">
+                {slide.content.sideImages.map((image: string, index: number) => (
+                  <div key={index} className="w-24 h-24 rounded-lg overflow-hidden shadow-lg">
+                    <img
+                      src={image || "/placeholder.svg"}
+                      alt={`Showcase ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )
 
